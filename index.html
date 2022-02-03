@@ -12,14 +12,35 @@
 </head>
 <body>
 
-    <header>
-        <nav class="navbar">
+    <header class="hero">
+        <nav class="nav">
+            <div class="nav__container">
+                <figure class="nav__logo">
+                    <img class="nav__img" src="./img/logo.svg" alt="logo">
+                </figure>
+
+                <label for="menu" class="nav__label">
+                    <i class="fas fa-bars nav__icon-start"></i>
+                </label>
+
+                <input class="nav__input" type="checkbox" id="menu">
+                
+                <div class="nav__menu">
+                    <a class="nav__link" href="#">Inicio</a>
+                    <a class="nav__link" href="#">Sobre Nosotros</a>
+                    <a class="nav__link nav__link--cta" href="#">Contacto</a>
+                </div>
+            </div>
+            
+            
 
         </nav>
 
     </header>
 
     <main>
+        
+        
 
     </main>
 
@@ -27,5 +48,6 @@
 
     </footer>
     
+    <script src="https://kit.fontawesome.com/7a3873578f.js" crossorigin="anonymous"></script>
 </body>
 </html>
