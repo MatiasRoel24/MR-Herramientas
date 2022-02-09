@@ -100,9 +100,9 @@ html{
     }
 
     .nav__menu{
-        position: fixed;
-        top: 7.9rem;
-        bottom: 55rem;
+        position:fixed;
+        top: 7.90rem;
+        bottom: 0rem;
         background-color: var(--color-principal);
         width: 100%;
         left: 0;
