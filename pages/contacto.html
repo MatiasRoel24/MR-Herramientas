@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/logo.svg">
+    <!--Fuente-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet"> 
+    <!--CSS-->
+    <link rel="stylesheet" href="../css/style.css">
+    <title>MR-Herramientas</title>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="nav__container">
+                <figure class="nav__logo">
+                    <img class="nav__img" src="../img/logo.svg" alt="logo">
+                </figure>
+
+                <label for="menu" class="nav__label">
+                    <i class="fas fa-bars nav__icon-start"></i>
+                </label>
+
+                <input class="nav__input" type="checkbox" id="menu">
+                
+                <div class="nav__menu">
+                    <a class="nav__link" href="../index.html">Inicio</a>
+                    <a class="nav__link" href="productos.html">Productos</a>
+                    <a class="nav__link nav__link--cta" href="contacto.html">Contacto</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <form class="form" action="">
+            <h2 class="form__title">Envianos un mensaje: </h2>
+            <div class="form__container">
+                <div class="form__group">
+                    <input class="form__input" type="text" id="name"  placeholder="">
+                    <label class="form__label" for="name">Nombre:</label>
+                    <span class="form__line"></span>
+                </div>
+                <div class="form__group">
+                    <input class="form__input"type="text" id="apellido"  placeholder="">
+                    <label class="form__label" for="apellido">Apellido:</label>
+                    <span class="form__line"></span>
+                </div>
+                <div class="form__group">   
+                    <textarea class="form__textarea" name="textarea" id="textarea" cols="30" rows="10" placeholder="Ingrese su mensaje"></textarea>
+                    <span class="form__line"></span>
+                </div>
+                <a class= "btn-grad" href="#">Enviar</a>
+            </div>
+        </form>
+
+
+    </main>
+
+    <footer class="footer footer--nc">
+        <div class="contenedor__footer">
+            <div class="contenedor__redes">
+                <h4 class="redes__titulo">Nuestras redes:</h4>
+                <div class="contenedor__icono">
+                    <a href="#"><i class="icono icono--instagram fab fa-instagram"></i></a>
+                    <a href="#"><i class="icono fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="copy__footer">
+                <h4>©Copyright 2022 | Creada por MatiasRoel</h4>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/7a3873578f.js" crossorigin="anonymous"></script>
+</body>
+</html>
