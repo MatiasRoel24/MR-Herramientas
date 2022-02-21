@@ -1,61 +1,75 @@
-let martillo = 'martillo';
-let stockMartillo = 20;
-let precioMartillo = 100;
+class Herramienta{
+    constructor(nombre, precio, stock){
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+    }
+}
 
-let llaveAlem = 'llave alem';
-let stockLlaveAlem = 10;
-let precioLlaveAlem = 50;
+let textoListadoMenu = "Estos son los productos: ";
+let contador = 0;
+
+const martillo = new Herramienta("Martillo",100,20);
+const llaveAlem = new Herramienta("Llave alem",50,10);
+
+const listaHerramientas = [martillo, llaveAlem];
+
+for(const herramienta of listaHerramientas){
+    contador++;
+    textoListadoMenu += "\n" + contador + "- " + herramienta.nombre + " ----> " + "$" + herramienta.precio;
+}
 
 function listarProductos(){
-    alert(`Estas son las herramientas: \n1 - ${martillo}: $${precioMartillo}\n2 - ${llaveAlem}: $${precioLlaveAlem}`);
+    alert(textoListadoMenu);
 }
 
 function comprar(){
-   let opcionCompra = prompt("Desea comprar:\n 1- martillo\n 2- llave alem\nESC- SALIR");
-        if (opcionCompra == "1"){
+   let opcionCompra = prompt("Desea comprar:\n 1- Martillo\n 2- Llave alem").toUpperCase();
+        if (opcionCompra == "MARTILLO"){
             let cantidadCompra = parseInt(prompt("Cuantos desea comprar?"));
             let total = 0;
-            if(cantidadCompra <= stockMartillo){
-                stockMartillo -= cantidadCompra;
-                cantidadCompra *= precioMartillo;
-                console.log("Quedan: " + stockMartillo);
+            if(cantidadCompra <= listaHerramientas[0].stock){
+                listaHerramientas[0].stock -= cantidadCompra;
+                cantidadCompra *= listaHerramientas[0].precio;
+                console.log("Quedan: " + listaHerramientas[0].stock);
                 alert("Su compra se realizo con exito y es de $" + cantidadCompra);
                 total =+ cantidadCompra;
             }
             else{
-                if( stockMartillo == 0){
+                if(listaHerramientas[0].stock == 0){
                     alert("No tenemos stock")
                 }
                 else{
-                    alert("Solo podes comprar: " + stockMartillo);
+                    alert("Solo podes comprar: " + listaHerramientas[0].stock);
                 }
             }
         }
-        else if (opcionCompra == "2"){
+        else if (opcionCompra == "LLAVE ALEM"){
             cantidadCompra = prompt("Cuantos desea comprar?");
-            if(cantidadCompra <= stockLlaveAlem){
-                stockLlaveAlem -= cantidadCompra;
-                cantidadCompra *= precioLlaveAlem;
-                console.log("Quedan: " + stockLlaveAlem);
+            if(cantidadCompra <= listaHerramientas[1].stock){
+                listaHerramientas[1].stock -= cantidadCompra;
+                cantidadCompra *= listaHerramientas[1].precio;
+                console.log("Quedan: " + listaHerramientas[1].stock);
                 alert("Su compra se realizo con exito y es de $" + cantidadCompra);
                 total =+ cantidadCompra;
             }
             else{
-                if( stockLlaveAlem == 0){
+                if(listaHerramientas[1].stock == 0){
                     alert("No tenemos stock")
                 }
                 else{
-                    alert("Solo podes comprar: " + stockMartillo);
+                    alert("Solo podes comprar: " + listaHerramientas[1].stock);
                 }
                 }
             }
         else{
-            alert("Gracias por visitarnos :");        
+            alert("Gracias por visitarnos");        
         }
     }
 
+
 function menu(){
-    let opcion = prompt("Menu: \n1 - Ver herramientas \n2 - Comprar\n ESC- SALIR");
+    let opcion = prompt("Menu: \n1 - Ver herramientas\n2 - Comprar\n ESC- SALIR");
     while(opcion != "ESC"){
         switch (opcion) {
             case "1":
