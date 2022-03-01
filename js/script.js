@@ -1,88 +1,102 @@
+/* Objeto de herramientas */
 class Herramienta{
-    constructor(nombre, precio, stock){
+    constructor(nombre, precio, stock, color){
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
+        this.color = color;
     }
 }
 
-let textoListadoMenu = "Estos son los productos: ";
+/* Herramientas */
+
+const martillo = new Herramienta("Martillo",100,20,"Rojo");
+const llaveAlem = new Herramienta("Llave alem",50,10,"Rojo");
+const pinza = new Herramienta("Pinza",90,40,"Rojo");
+const cajaHerramientas = new Herramienta("Caja de Herramientas",500,15,"Azul");
+const destornillador = new Herramienta("Destornillador",10,100,"Azul");
+
+/* Array de objetos */
+const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destornillador]; 
+
+/* Variables globales */
+let textoMenu = "Esto son los productos:\n"
+let totalVenta = 0;
 let contador = 0;
+let textoColor = "";
 
-const martillo = new Herramienta("Martillo",100,20);
-const llaveAlem = new Herramienta("Llave alem",50,10);
+/* Funciones */
 
-const listaHerramientas = [martillo, llaveAlem];
-
-for(const herramienta of listaHerramientas){
-    contador++;
-    textoListadoMenu += "\n" + contador + "- " + herramienta.nombre + " ----> " + "$" + herramienta.precio;
+/* Recorre el array */
+for (const herramienta of listaHerramientas){
+        contador++;
+        textoMenu += `${contador}- ${herramienta.nombre}: $${herramienta.precio}\n`;
 }
 
-function listarProductos(){
-    alert(textoListadoMenu);
+/* Muestra de menu */
+function mostrarMenu(){
+    alert(textoMenu)
 }
 
-function comprar(){
-   let opcionCompra = prompt("Desea comprar:\n 1- Martillo\n 2- Llave alem").toUpperCase();
-        if (opcionCompra == "MARTILLO"){
-            let cantidadCompra = parseInt(prompt("Cuantos desea comprar?"));
-            let total = 0;
-            if(cantidadCompra <= listaHerramientas[0].stock){
-                listaHerramientas[0].stock -= cantidadCompra;
-                cantidadCompra *= listaHerramientas[0].precio;
-                console.log("Quedan: " + listaHerramientas[0].stock);
+/* Compra */
+function compraHerramientas(){ /* Como lo paso por parametro la herramienta buscada para hacer otra funcion? */
+        let herramientaCompra = prompt("Ingrese el producto que desea comprar (ESC para salir): ");
+        let herramientaBuscada = listaHerramientas.find(herramienta => herramienta.nombre === herramientaCompra);/* LET? */
+        while (herramientaBuscada != undefined){
+            let cantidadCompra = parseInt(prompt("Ingrese la cantidad que desea comprar: "));
+            if(cantidadCompra <= herramientaBuscada.stock){
+                herramientaBuscada.stock -= cantidadCompra;
+                cantidadCompra *= herramientaBuscada.precio;
+                console.log("Quedan: " + herramientaBuscada.stock + " de " + herramientaBuscada.nombre);
                 alert("Su compra se realizo con exito y es de $" + cantidadCompra);
-                total =+ cantidadCompra;
+                totalVenta += cantidadCompra;
             }
-            else{
-                if(listaHerramientas[0].stock == 0){
-                    alert("No tenemos stock")
-                }
-                else{
-                    alert("Solo podes comprar: " + listaHerramientas[0].stock);
-                }
-            }
+            herramientaCompra = prompt("Ingrese el producto que desea comprar (ESC para salir): ");
+            herramientaBuscada = listaHerramientas.find(herramienta => herramienta.nombre === herramientaCompra);/* LET? */
         }
-        else if (opcionCompra == "LLAVE ALEM"){
-            cantidadCompra = prompt("Cuantos desea comprar?");
-            if(cantidadCompra <= listaHerramientas[1].stock){
-                listaHerramientas[1].stock -= cantidadCompra;
-                cantidadCompra *= listaHerramientas[1].precio;
-                console.log("Quedan: " + listaHerramientas[1].stock);
-                alert("Su compra se realizo con exito y es de $" + cantidadCompra);
-                total =+ cantidadCompra;
-            }
-            else{
-                if(listaHerramientas[1].stock == 0){
-                    alert("No tenemos stock")
-                }
-                else{
-                    alert("Solo podes comprar: " + listaHerramientas[1].stock);
-                }
-                }
-            }
-        else{
-            alert("Gracias por visitarnos");        
-        }
+        alert(`El total de su compra es de $${totalVenta}`);
+}
+
+/* Filtrar herramienta por color */
+
+function filtradoHerramientas(){
+    let colorHerramienta = prompt("Ingrese color de la herramienta(Rojo o azul): ");
+    const colorBuscado = listaHerramientas.filter(herramienta => herramienta.color === colorHerramienta);
+
+    for(color of colorBuscado){
+        textoColor += color.nombre + " ";
     }
+    
+    alert(`Las herramientas con color ${colorHerramienta} son: ${textoColor}`);
+
+    compraHerramientas() /* Como hago para aplicar el filtrado? */
+}
+
+/* Salir */
+function salir(){
+    alert("Hasta luego")
+}
 
 
+/* MENU */
 function menu(){
-    let opcion = prompt("Menu: \n1 - Ver herramientas\n2 - Comprar\n ESC- SALIR");
-    while(opcion != "ESC"){
+    let opcion = prompt("--MENU--\n1- Comprar\n2- Filtro herramienta por color\n3- Salir");
         switch (opcion) {
             case "1":
-                listarProductos();
+                mostrarMenu();
+                compraHerramientas();
                 break;
             case "2":
-                comprar();
+                filtradoHerramientas();
+                break;
+            case "3":
+                salir();
                 break;
             default:
                 alert("Opcion incorrecta :C");
         }
-        opcion = prompt("Menu: \n1 - Ver herramientas \n2 - Comprar\n ESC- SALIR");
-    }
 }
 
+
 menu()
+
