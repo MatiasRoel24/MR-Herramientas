@@ -238,11 +238,11 @@ body{
 
 .hero__titulo{
     font-size: 10rem;
-    color: var(--color-blanco);
+    color: #47A025;
 }
 
 .hero__subtitulo{
-    color: var(--color-blanco);
+    color: #47A025;
     font-size: 4rem;
 }
 
@@ -271,6 +271,40 @@ body{
 }
 
 /* PRODUCTOS */
+
+.text-filter{
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+}
+
+.container-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-rojo{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-azul{
+    background-color: blue;
+    color: white;
+    cursor: pointer;    
+}
+
+.btn__prod{
+    padding: 1rem;
+    margin-left: 2rem;
+    border: none;
+    border-radius: 1rem;
+    width: 20rem;
+    font-weight: bold;
+}
 
 .container-cards{
     display: flex;
@@ -358,6 +392,16 @@ body{
 }
 
 @media (max-width: 768px){
+
+    .btn__prod{
+        padding: 1rem;
+        margin-left: 2rem;
+        border: none;
+        border-radius: 1rem;
+        width: 15rem;
+        font-weight: bold;
+    }
+
     .card{
         padding: 2.5rem;
         margin-top: 3rem;
