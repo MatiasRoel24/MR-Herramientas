@@ -238,11 +238,11 @@ body{
 
 .hero__titulo{
     font-size: 10rem;
-    color: #47A025;
+    color: black;
 }
 
 .hero__subtitulo{
-    color: #47A025;
+    color: black;
     font-size: 4rem;
 }
 
@@ -272,29 +272,22 @@ body{
 
 /* PRODUCTOS */
 
-.text-filter{
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-}
-
-.container-btn{
+.filtro__container{
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
 }
 
-.btn-rojo{
-    background-color: red;
-    color: white;
-    cursor: pointer;
+.filtro__span{
+    font-size: 1.5rem;
 }
 
-.btn-azul{
-    background-color: blue;
-    color: white;
-    cursor: pointer;    
+.filtro__btn{
+    padding: 0.5rem;
+    background-color: #fafafa;
+    border: none;
 }
 
 .btn__prod{
