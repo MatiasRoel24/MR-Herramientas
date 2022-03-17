@@ -28,12 +28,6 @@ const destornillador = new Herramienta("Destornillador",10,100,"Azul","../img/de
 /* Array de objetos */
 const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destornillador]; 
 
-/* Recorre el array */ /* ??????????????????? */
-for (const herramienta of listaHerramientas){
-        contador++;
-        textoMenu += `${contador}- ${herramienta.nombre}: $${herramienta.precio}\n`;
-}
-
 /* ---FILTRO SELECT--- */
 
     /* Genero cards completas */
@@ -50,11 +44,11 @@ for (const herramienta of listaHerramientas){
                                             <p>${producto.nombre}</p>
                                             </div>
                                             <div class="card__descrip">
-                                                <p>El precio es: $${producto.precio}</p>
+                                                <p>$${producto.precio}</p>
                                                 </div>    
                                                 <p>El color es: ${producto.color}</p>
                                         </div>
-                                        <a id="btn-card" class="btn-grad btn-grad--ancho" href="#">Comprar</a>
+                                        <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>
                                     </div>
                                 </div>`
             contenedorProductos.appendChild(cards);
@@ -79,11 +73,11 @@ for (const herramienta of listaHerramientas){
                                                 <p>${producto.nombre}</p>
                                             </div>
                                             <div class="card__descrip">
-                                                <p>El precio es: $${producto.precio}</p>
+                                                <p>$${producto.precio}</p>
                                             </div>  
                                                 <p>El color es: ${producto.color}</p>
                                         </div>
-                                        <a id="btn-card" class="btn-card btn-grad btn-grad--ancho" href="#">Comprar</a>
+                                        <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>   
                                     </div>
                                 </div>`
             contenedorProductos.appendChild(cards);
@@ -142,14 +136,36 @@ function anyadirItemCarrito(itemTitle,itemPrecioyStock,itemImg){
             <img class="carrito__img" src="${itemImg}" alt="">
             <h4 class= "carrito__title">${itemTitle}</h4>
             <button id="boton-agregar" class="btn-agregar">+</button>
-            <h5 class= "carrito__descrip">${itemPrecioyStock}</h5>
+            <h5 class= "carrito__precio">${itemPrecioyStock}</h5>
+            <h5 class= "carrito__cantidad">1</h5>
             <button id="boton-vaciar" class="btn-vaciar">X</button>
-            </div>`
-        rowCardsCarrito.innerHTML = cardsCarritoContenido;
+        </div>`
         containerCardsCarrito.append(rowCardsCarrito)
+        rowCardsCarrito.innerHTML = cardsCarritoContenido;
+        totalCarrito()
 }
 
+function totalCarrito(){
+    let total = 0;
+    const cardTotal = document.querySelector(".total__plata");
+    
+    const carritoItems = document.querySelectorAll(".carrito__elementos");
+    
+    
+    carritoItems.forEach((carritoItem) =>{
+        const carritoItemPrecioElemento = carritoItem.querySelector('.carrito__precio');
+        const carritoItemPrecio = Number(carritoItemPrecioElemento.textContent.replace('$',''));
+        
+        const carritoItemCantidad = carritoItem.querySelector('.carrito__cantidad');
+    
+    });
+    
+}
+
+/* INICIO */
 carrito();
+
+
 
 
 
