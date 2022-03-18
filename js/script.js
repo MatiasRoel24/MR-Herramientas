@@ -1,4 +1,5 @@
 /* Variables globales */
+/* const miLocalStorage = window.localStorage; */
 let textoMenu = "Esto son los productos:\n"
 let totalVenta = 0;
 let contador = 0;
@@ -72,11 +73,10 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                                             <div class="card__titulo">
                                                 <p>${producto.nombre}</p>
                                             </div>
-                                            <div class="card__descrip">
-                                                <p>$${producto.precio}</p>
+                                            <div class="card__descripcion">
+                                                <p>El precio es:</p>
+                                                <p class="card__descrip">$${producto.precio}</p>
                                             </div>
-                                              
-                                                <p>El color es: ${producto.color}</p>
                                         </div>
                                         <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>   
                                     </div>
@@ -155,7 +155,6 @@ function anyadirItemCarrito(itemTitle,itemPrecioyStock,itemImg){
         rowCardsCarrito.querySelector('#boton-vaciar').addEventListener('click', eliminarCardCarrito)
         
         rowCardsCarrito.querySelector('.carrito__cantidad').addEventListener('click',cambiarCantidadItem)
-        
         totalCarrito()
 }
 
@@ -203,6 +202,10 @@ function comprarButtonClicked(){
     containerCardsCarrito.innerHTML = ''; 
     totalCarrito();
 }
+
+/*  function guardarCarritoEnLocalStorage(){
+    miLocalStorage.setItem('carrito', itemTitle);
+}  */
 
 /* INICIO */
 carrito();

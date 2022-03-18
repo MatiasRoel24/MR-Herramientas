@@ -282,8 +282,6 @@ body{
     font-weight: bold;
 }
 
-
-
 .container-cards{
     display: flex;
     flex-direction: column;
@@ -463,7 +461,6 @@ body{
     background-position: right center;
     color: #fff;
   }
-  
 
 
 .total__titulo{
@@ -531,6 +528,21 @@ body{
 
 .carrito__descrip{
     font-size: 2rem;
+}
+
+@media (max-width: 768px){
+    .carrito__total{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 10rem;
+        margin-left: 2rem;
+    }
+
+    .carrito__img{
+        width: 8rem;
+        height: 8rem;
+    }
 }
 
 
