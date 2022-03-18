@@ -535,7 +535,7 @@ body{
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        gap: 10rem;
+        gap: 1rem;
         margin-left: 2rem;
     }
 
