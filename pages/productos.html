@@ -45,9 +45,7 @@
                 <option value="Azul">Azul</option>
             </select>
         </section> 
-        <!-- Cards -->
-        <section id="items" class="container-productos">
-        </section>
+        
         <!-- Carrito -->
         <aside>
             <h2 class="shop__titulo">Carrito de compras: </h2>
@@ -55,12 +53,18 @@
             <div class="carrito__container">
                 <!-- Carrito productos omitido -->
                 <!-- Total carrito -->
-                <div class="carrito__total">
-                    <h5 class="total__titulo">Total: </h5>
-                    <h5 class="total__plata">$0</h5>
-                </div>
             </div>
+            <div class="carrito__total">
+                <h5 class="total__titulo">Total: </h5>
+                <h5 class="total__plata">$0</h5> 
+            </div>
+            <!-- boton de comprar -->
+            <button class="carrito_boton-comprar">Comprar</button>
         </aside>
+
+        <!-- Cards -->
+        <section id="items" class="container-productos">
+        </section>
 
     </main>
 
@@ -78,8 +82,8 @@
             </div>
         </div>
     </footer>
-
-    <script src="../js/script.js"></script>
     <script src="https://kit.fontawesome.com/7a3873578f.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

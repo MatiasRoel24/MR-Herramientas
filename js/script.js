@@ -74,7 +74,8 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                                             </div>
                                             <div class="card__descrip">
                                                 <p>$${producto.precio}</p>
-                                            </div>  
+                                            </div>
+                                              
                                                 <p>El color es: ${producto.color}</p>
                                         </div>
                                         <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>   
@@ -107,15 +108,13 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
 
 
 function carrito(){
-    /* let cc = 1 */ /* Contador */
     const cardBtns = document.querySelectorAll('#btn-card');
     cardBtns.forEach((cardBtn) => {
-        /* Con esto le puedo dar atributo con numero, pero esta bien? */
-        /* cardBtn.setAttribute('marcador',cc)
-        cc++ */
         cardBtn.addEventListener('click', compraClick)
     })
 }
+
+const comprarButton = document.querySelector('.carrito_boton-comprar').addEventListener('click', comprarButtonClicked)
 
 function compraClick(e){
     let button = e.target;
@@ -130,6 +129,17 @@ function compraClick(e){
 let containerCardsCarrito = document.querySelector(".carrito__container");/* VARIBLE GLOBAL */
 
 function anyadirItemCarrito(itemTitle,itemPrecioyStock,itemImg){
+
+    const elementsTitle = containerCardsCarrito.getElementsByClassName('carrito__title');
+    for(let i = 0; i < elementsTitle.length; i++){
+        if(elementsTitle[i].textContent == itemTitle){
+            let elmentQuantity = elementsTitle[i].parentElement.parentElement.querySelector(".carrito__cantidad");
+            elmentQuantity.value++;
+            totalCarrito();
+            return; /* Para que termine la funcion */
+        }
+    }
+
     let rowCardsCarrito =  document.createElement("div");
     let cardsCarritoContenido = `
         <div class="carrito__elementos">
@@ -137,11 +147,16 @@ function anyadirItemCarrito(itemTitle,itemPrecioyStock,itemImg){
             <h4 class= "carrito__title">${itemTitle}</h4>
             <button id="boton-agregar" class="btn-agregar">+</button>
             <h5 class= "carrito__precio">${itemPrecioyStock}</h5>
-            <h5 class= "carrito__cantidad">1</h5>
+            <input class="carrito__cantidad" type="number" value="1">
             <button id="boton-vaciar" class="btn-vaciar">X</button>
         </div>`
-        containerCardsCarrito.append(rowCardsCarrito)
         rowCardsCarrito.innerHTML = cardsCarritoContenido;
+        containerCardsCarrito.append(rowCardsCarrito);
+
+        rowCardsCarrito.querySelector('#boton-vaciar').addEventListener('click', eliminarCardCarrito)
+        
+        rowCardsCarrito.querySelector('.carrito__cantidad').addEventListener('click',cambiarCantidadItem)
+        
         totalCarrito()
 }
 
@@ -157,9 +172,37 @@ function totalCarrito(){
         const carritoItemPrecio = Number(carritoItemPrecioElemento.textContent.replace('$',''));
         
         const carritoItemCantidad = carritoItem.querySelector('.carrito__cantidad');
-    
+        const carritoItemContador = Number(carritoItemCantidad.value);
+        
+        total += carritoItemPrecio * carritoItemContador;
+        
     });
     
+    cardTotal.innerHTML = `$${total}`;
+}
+
+function eliminarCardCarrito(e){
+    const buttonClicked = e.target;
+    buttonClicked.closest('.carrito__elementos').remove();
+    totalCarrito();
+}
+
+function cambiarCantidadItem(e){
+    const input = e.target;
+    input.value <= 0 ? (input.value = 1) : null; 
+    totalCarrito();
+}
+
+function comprarButtonClicked(){
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Su compra se realizo con exito',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    containerCardsCarrito.innerHTML = ''; 
+    totalCarrito();
 }
 
 /* INICIO */
