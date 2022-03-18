@@ -43,12 +43,12 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                                             <div class="card__titulo">
                                             <p>${producto.nombre}</p>
                                             </div>
-                                            <div class="card__descrip">
-                                                <p>$${producto.precio}</p>
-                                                </div>    
-                                                <p>El color es: ${producto.color}</p>
+                                            <div class="card__descripcion">
+                                                <p>El precio es:</p>
+                                                <p class="card__descrip">$${producto.precio}</p>
+                                            </div>    
+                                            <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>
                                         </div>
-                                        <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>
                                     </div>
                                 </div>`
             contenedorProductos.appendChild(cards);
@@ -145,7 +145,6 @@ function anyadirItemCarrito(itemTitle,itemPrecioyStock,itemImg){
         <div class="carrito__elementos">
             <img class="carrito__img" src="${itemImg}" alt="">
             <h4 class= "carrito__title">${itemTitle}</h4>
-            <button id="boton-agregar" class="btn-agregar">+</button>
             <h5 class= "carrito__precio">${itemPrecioyStock}</h5>
             <input class="carrito__cantidad" type="number" value="1">
             <button id="boton-vaciar" class="btn-vaciar">X</button>
