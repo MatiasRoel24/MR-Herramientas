@@ -1,11 +1,16 @@
 /* Variables globales */
-/* const miLocalStorage = window.localStorage; */
-let textoMenu = "Esto son los productos:\n"
-let totalVenta = 0;
-let contador = 0;
-let textoColor = "";
+    let textoMenu = "Esto son los productos:\n"
+    let totalVenta = 0;
+    let contador = 0;
+    let textoColor = "";
+    /* Variables carrito */
+        let carrito = [];
+        let DOMcarrito = document.querySelector(".carrito__container");
+        let DOMTotal = document.querySelector(".total__plata");
+        let DOMbtnVaciar = document.querySelector(".carrito-boton-vaciar");
+        const miLocalStorage = window.localStorage;
     /* Variable select */
-    let contenedorProductos = document.querySelector(".container-productos");
+        let contenedorProductos = document.querySelector(".container-productos");
 
 /* Objeto de herramientas */
 class Herramienta{
@@ -18,6 +23,7 @@ class Herramienta{
         this.id = id;
     }
 }
+
 
 /* Herramientas */
 const martillo = new Herramienta("Martillo",100,20,"Rojo","../img/martillo.jpg",1);
@@ -48,14 +54,12 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                                                 <p>El precio es:</p>
                                                 <p class="card__descrip">$${producto.precio}</p>
                                             </div>    
-                                            <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>
+                                            <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>
                                         </div>
                                     </div>
                                 </div>`
-            contenedorProductos.appendChild(cards);
-            
+            contenedorProductos.appendChild(cards);    
     }
-
 
     /* Genero cards filtradas */
     function generadorCards(listaColor){
@@ -78,7 +82,7 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                                                 <p class="card__descrip">$${producto.precio}</p>
                                             </div>
                                         </div>
-                                        <button id="btn-card" class="btn-grad btn-grad--ancho" type="button">Comprar</button>   
+                                        <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>   
                                     </div>
                                 </div>`
             contenedorProductos.appendChild(cards);
@@ -105,116 +109,119 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
     }
 
 /* ---CARRITO--- */
+    /* Busco btns card */
+        let btnProductos = document.querySelectorAll("#btn-card");
+        btnProductos.forEach((btnProducto) => {
+        btnProducto.addEventListener('click', anyadirProductoAlCarrito)/* Por cada uno escucho un cambio*/
+        })
+    /* Añadir productos al carrito */
 
-
-function carrito(){
-    const cardBtns = document.querySelectorAll('#btn-card');
-    cardBtns.forEach((cardBtn) => {
-        cardBtn.addEventListener('click', compraClick)
-    })
-}
-
-const comprarButton = document.querySelector('.carrito_boton-comprar').addEventListener('click', comprarButtonClicked)
-
-function compraClick(e){
-    let button = e.target;
-    let item = button.closest('.card');
-    
-    let itemTitle = item.querySelector(".card__titulo").textContent;
-    let itemPrecioyStock = item.querySelector(".card__descrip").textContent;
-    let itemImg = item.querySelector('.card__imagen').src;
-    anyadirItemCarrito(itemTitle,itemPrecioyStock,itemImg)
-}
-
-let containerCardsCarrito = document.querySelector(".carrito__container");/* VARIBLE GLOBAL */
-
-function anyadirItemCarrito(itemTitle,itemPrecioyStock,itemImg){
-
-    const elementsTitle = containerCardsCarrito.getElementsByClassName('carrito__title');
-    for(let i = 0; i < elementsTitle.length; i++){
-        if(elementsTitle[i].textContent == itemTitle){
-            let elmentQuantity = elementsTitle[i].parentElement.parentElement.querySelector(".carrito__cantidad");
-            elmentQuantity.value++;
-            totalCarrito();
-            return; /* Para que termine la funcion */
+        function anyadirProductoAlCarrito(e){
+            /* Efectuo el cambio escuchado */
+                /* Añadir nodo a nuestro carrito */
+                carrito.push(e.target.getAttribute('marcador')); /* Busco el id */
+                /* Actualizamos el carrito */
+                renderizarCarrito();
+                /* Actualizamos el localStorage */
+                guardarCarritoEnLocalStorage();
         }
-    }
+        let containerCardsCarrito = document.querySelector(".carrito__container");
 
-    let rowCardsCarrito =  document.createElement("div");
-    let cardsCarritoContenido = `
-        <div class="carrito__elementos">
-            <img class="carrito__img" src="${itemImg}" alt="">
-            <h4 class= "carrito__title">${itemTitle}</h4>
-            <h5 class= "carrito__precio">${itemPrecioyStock}</h5>
-            <input class="carrito__cantidad" type="number" value="1">
-            <button id="boton-vaciar" class="btn-vaciar">X</button>
-        </div>`
-        rowCardsCarrito.innerHTML = cardsCarritoContenido;
-        containerCardsCarrito.append(rowCardsCarrito);
+        function renderizarCarrito(){
+            /* Vaciamos todo el HTML */
+             DOMcarrito.textContent = ''; 
+            /* Quitamos los duplicados */
+            
+            const carritoSinDuplicados = [...new Set(carrito)];
+            
+            /* Generamos nodos apartir del carrito */
+            carritoSinDuplicados.forEach((item) => {
+                /* Buscamos el item que necesitamos*/
+                const miItem = listaHerramientas.filter((itemBaseDatos) =>{
+                    /* Coinciden las id? Solo puede existir un caso */
+                    return itemBaseDatos.id === parseInt(item);
+                });
+                
+                /* Cuenta el numero de veces que se repite el producto */
+                const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                    return itemId === item ? total += 1 : total;
+                }, 0);
+                
+                /* Creamos la card de item */
+                let rowCardsCarrito =  document.createElement("div");
+                let cardsCarritoContenido = `
+                    <div class="carrito__elementos">
+                        <img class="carrito__img" src="${miItem[0].imagen}" alt="">
+                        <h4 class= "carrito__title">${numeroUnidadesItem} x ${miItem[0].nombre} </h4>
+                        <h5 class= "carrito__precio">$${miItem[0].precio}</h5>
+                        <button id="boton-vaciar" class="btn-vaciar">X</button>
+                    </div>`
+                rowCardsCarrito.innerHTML = cardsCarritoContenido;
+                containerCardsCarrito.append(rowCardsCarrito);
+                /* Genero Boton */
+                let btnVaciar = document.querySelector("#boton-vaciar");
+                btnVaciar.dataset.item = item; /* ID del BTN */
+                btnVaciar.addEventListener('click',borrarItemCarrito);
+            });
+            DOMTotal.textContent = "$" + calcularTotal();    
+            
+        }
 
-        rowCardsCarrito.querySelector('#boton-vaciar').addEventListener('click', eliminarCardCarrito)
-        
-        rowCardsCarrito.querySelector('.carrito__cantidad').addEventListener('click',cambiarCantidadItem)
-        totalCarrito()
-}
-
-function totalCarrito(){
-    let total = 0;
-    const cardTotal = document.querySelector(".total__plata");
+        function borrarItemCarrito(e){ /* PORQ PRIMERO EL ULTIMO?????? */
+            /* Obtengo el producto ID que en el btn pulsado */
+            const id = e.target.dataset.item;
+            console.log("🚀 ~ file: script.js ~ line 173 ~ borrarItemCarrito ~ id", id)
+            /* Borramos el producto */
+            carrito = carrito.filter((carritoId) =>{
+                return carritoId !== id;
+            });
+            /* Volvemos a renderizar */
+            renderizarCarrito();
+            /* Actualizamos el localStorage */
+            guardarCarritoEnLocalStorage();
     
-    const carritoItems = document.querySelectorAll(".carrito__elementos");
-    
-    
-    carritoItems.forEach((carritoItem) =>{
-        const carritoItemPrecioElemento = carritoItem.querySelector('.carrito__precio');
-        const carritoItemPrecio = Number(carritoItemPrecioElemento.textContent.replace('$',''));
-        
-        const carritoItemCantidad = carritoItem.querySelector('.carrito__cantidad');
-        const carritoItemContador = Number(carritoItemCantidad.value);
-        
-        total += carritoItemPrecio * carritoItemContador;
-        
-    });
-    
-    cardTotal.innerHTML = `$${total}`;
-}
+        }
 
-function eliminarCardCarrito(e){
-    const buttonClicked = e.target;
-    buttonClicked.closest('.carrito__elementos').remove();
-    totalCarrito();
-}
+        function calcularTotal(){
+            return carrito.reduce((total, item) =>{
+                const miItem = listaHerramientas.filter((itemBaseDatos) =>{
+                    return itemBaseDatos.id === parseInt(item);
+                });
 
-function cambiarCantidadItem(e){
-    const input = e.target;
-    input.value <= 0 ? (input.value = 1) : null; 
-    totalCarrito();
-}
+                return total + miItem[0].precio;
+            }, 0).toFixed(2);
+        }
 
-function comprarButtonClicked(){
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Su compra se realizo con exito',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    containerCardsCarrito.innerHTML = ''; 
-    totalCarrito();
-}
+        function vaciarCarrito(){
+            /* Limpiamos el carrito */
+            carrito = [];
+            /* Renderizamos los cambios */
+            renderizarCarrito();
+            /* Borramos el LocalStorage  */
+            localStorage.clear();
+        }
 
-/*  function guardarCarritoEnLocalStorage(){
-    miLocalStorage.setItem('carrito', itemTitle);
-}  */
+        function guardarCarritoEnLocalStorage(){
+            miLocalStorage.setItem('carrito', JSON.stringify(carrito))
+        }
 
-/* INICIO */
-carrito();
+        function cargarCarritoDeLocalStorage(){
+            /* Existe un carrito en el localStorage? */
+            if (miLocalStorage.getItem('carrito') !== null){
+                /* Carga la info */
+                carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+            }
+        }
+
+        /* Evento */
+
+        DOMbtnVaciar.addEventListener('click',vaciarCarrito)
 
 
+        /* Inicio */
 
-
-
-
+        cargarCarritoDeLocalStorage();
+        renderizarCarrito();
 
 
 
