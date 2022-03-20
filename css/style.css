@@ -336,10 +336,9 @@ body{
 
 .btn-grad {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
 .btn-grad {
-   margin: 10px;
-   padding: 15px 45px;
+   margin-top: .5rem;
+   padding: 15px 40px;
    text-align: center;
-   text-transform: uppercase;
    transition: 0.5s;
    background-size: 200% auto;
    color: white;
@@ -348,6 +347,11 @@ body{
    display: block;
    text-decoration: none;
    border: none;
+   font-family: 'Poppins', sans-serif;
+ }
+
+ .cart-plus{
+     font-size: 2rem;
  }
 
  .btn-grad:hover {
@@ -423,7 +427,7 @@ body{
     }
 
     .btn-grad--ancho{
-        width:95%;
+        width:100%;
     }
 }
 
@@ -525,6 +529,18 @@ body{
     border: none; 
     border-radius: 1rem;
 }
+
+.carrito-boton-vaciar{
+    font-size: 2rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.icono-tacho{
+    color: red;
+}
+
 
 .carrito__descrip{
     font-size: 2rem;

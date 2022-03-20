@@ -212,6 +212,19 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                 carrito = JSON.parse(miLocalStorage.getItem('carrito'));
             }
         }
+        let btnCompra = document.querySelector(".carrito_boton-comprar")
+        btnCompra.addEventListener('click',compraTotal)
+        function compraTotal(){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Su compra se realizo con exito',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            containerCardsCarrito.innerHTML = ''; 
+            vaciarCarrito();
+        }
 
         /* Evento */
 
