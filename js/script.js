@@ -111,6 +111,7 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
 /* ---CARRITO--- */
     /* Busco btns card */
         let btnProductos = document.querySelectorAll("#btn-card");
+        console.log("🚀 ~ file: script.js ~ line 114 ~ btnProductos", btnProductos)
         btnProductos.forEach((btnProducto) => {
         btnProducto.addEventListener('click', anyadirProductoAlCarrito)/* Por cada uno escucho un cambio*/
         })
@@ -156,24 +157,26 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                         <h5 class= "carrito__precio">$${miItem[0].precio}</h5>
                         <button id="boton-vaciar" class="btn-vaciar">X</button>
                     </div>`
-                rowCardsCarrito.innerHTML = cardsCarritoContenido;
-                containerCardsCarrito.append(rowCardsCarrito);
-                /* Genero Boton */
-                let btnVaciar = document.querySelector("#boton-vaciar");
-                btnVaciar.dataset.item = item; /* ID del BTN */
-                btnVaciar.addEventListener('click',borrarItemCarrito);
+                    rowCardsCarrito.innerHTML = cardsCarritoContenido;
+                    containerCardsCarrito.append(rowCardsCarrito);
+                    /* Genero Boton */
+                    let btnsVaciar = rowCardsCarrito.querySelectorAll("#boton-vaciar");
+                    btnsVaciar.forEach((btn) =>{
+                        btn.setAttribute('data-set',item);
+                        btn.addEventListener('click',borrarItemCarrito)
+                    }) 
             });
             DOMTotal.textContent = "$" + calcularTotal();    
-            
         }
+    
 
-        function borrarItemCarrito(e){ /* PORQ PRIMERO EL ULTIMO?????? */
+        function borrarItemCarrito(e){ 
             /* Obtengo el producto ID que en el btn pulsado */
-            const id = e.target.dataset.item;
-            console.log("🚀 ~ file: script.js ~ line 173 ~ borrarItemCarrito ~ id", id)
+            const btnsVaciar = e.target;
+            let btnId = btnsVaciar.getAttribute("data-set");
             /* Borramos el producto */
-            carrito = carrito.filter((carritoId) =>{
-                return carritoId !== id;
+            carrito = carrito.filter((carritoId) => {
+                return carritoId !== btnId;
             });
             /* Volvemos a renderizar */
             renderizarCarrito();
