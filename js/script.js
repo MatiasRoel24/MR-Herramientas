@@ -5,7 +5,9 @@
     let textoColor = "";
     /* Variables carrito */
         let carrito = [];
+        let containerCardsCarrito = document.querySelector(".carrito__container");
         let DOMcarrito = document.querySelector(".carrito__container");
+        let btnCompra = document.querySelector(".carrito_boton-comprar");
         let DOMTotal = document.querySelector(".total__plata");
         let DOMbtnVaciar = document.querySelector(".carrito-boton-vaciar");
         const miLocalStorage = window.localStorage;
@@ -23,7 +25,6 @@ class Herramienta{
         this.id = id;
     }
 }
-
 
 /* Herramientas */
 const martillo = new Herramienta("Martillo",100,20,"Rojo","../img/martillo.jpg",1);
@@ -80,9 +81,9 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                                             <div class="card__descripcion">
                                                 <p>El precio es:</p>
                                                 <p class="card__descrip">$${producto.precio}</p>
-                                            </div>
+                                                </div>
+                                            <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>   
                                         </div>
-                                        <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>   
                                     </div>
                                 </div>`
             contenedorProductos.appendChild(cards);
@@ -111,9 +112,8 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
 /* ---CARRITO--- */
     /* Busco btns card */
         let btnProductos = document.querySelectorAll("#btn-card");
-        console.log("🚀 ~ file: script.js ~ line 114 ~ btnProductos", btnProductos)
         btnProductos.forEach((btnProducto) => {
-        btnProducto.addEventListener('click', anyadirProductoAlCarrito)/* Por cada uno escucho un cambio*/
+            btnProducto.addEventListener('click', anyadirProductoAlCarrito)/* Por cada uno escucho un cambio*/
         })
     /* Añadir productos al carrito */
 
@@ -126,8 +126,7 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                 /* Actualizamos el localStorage */
                 guardarCarritoEnLocalStorage();
         }
-        let containerCardsCarrito = document.querySelector(".carrito__container");
-
+        
         function renderizarCarrito(){
             /* Vaciamos todo el HTML */
              DOMcarrito.textContent = ''; 
@@ -153,7 +152,7 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                 let cardsCarritoContenido = `
                     <div class="carrito__elementos">
                         <img class="carrito__img" src="${miItem[0].imagen}" alt="">
-                        <h4 class= "carrito__title">${numeroUnidadesItem} x ${miItem[0].nombre} </h4>
+                        <h4 class= "carrito__title">${numeroUnidadesItem} X ${miItem[0].nombre} </h4>
                         <h5 class= "carrito__precio">$${miItem[0].precio}</h5>
                         <button id="boton-vaciar" class="btn-vaciar">X</button>
                     </div>`
@@ -164,11 +163,10 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                     btnsVaciar.forEach((btn) =>{
                         btn.setAttribute('data-set',item);
                         btn.addEventListener('click',borrarItemCarrito)
-                    }) 
+                    });
             });
             DOMTotal.textContent = "$" + calcularTotal();    
         }
-    
 
         function borrarItemCarrito(e){ 
             /* Obtengo el producto ID que en el btn pulsado */
@@ -215,7 +213,11 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
                 carrito = JSON.parse(miLocalStorage.getItem('carrito'));
             }
         }
-        let btnCompra = document.querySelector(".carrito_boton-comprar")
+
+        /* Eventos */
+
+        /* Boton de compra */
+        
         btnCompra.addEventListener('click',compraTotal)
         function compraTotal(){
             Swal.fire({
@@ -229,15 +231,14 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
             vaciarCarrito();
         }
 
-        /* Evento */
+        /* Boton vaciar */
 
         DOMbtnVaciar.addEventListener('click',vaciarCarrito)
 
+/* Inicio */
 
-        /* Inicio */
-
-        cargarCarritoDeLocalStorage();
-        renderizarCarrito();
+cargarCarritoDeLocalStorage();
+renderizarCarrito();
 
 
 
