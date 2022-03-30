@@ -7,6 +7,8 @@
     <link rel="icon" href="../img/logo.svg">
     <!--Fuente-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet"> 
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!--CSS-->
     <link rel="stylesheet" href="../css/style.css">
     <title>MR-Herramientas</title>
@@ -36,18 +38,8 @@
     </header>
 
     <main>
-        <!-- Boton de filtro -->
-        <!-- <section class="filtro__container">
-            <span class="filtro__span">Filtre por color: </span>
-            <select class="filtro__btn" name="filtro" id="filtro-color" onchange="filtroSelect();">
-                <option value="Seleccion" selected>Sin filtro</option>
-                <option value="Rojo">Rojo</option>
-                <option value="Azul">Azul</option>
-            </select>
-        </section>  -->
-        
         <!-- Carrito -->
-        <aside>
+        <aside >
             <h2 class="shop__titulo">Carrito de compras: </h2>
             <!-- Elementos del carrito -->
             <div class="carrito__container">
@@ -66,7 +58,7 @@
         </aside>
 
         <!-- Cards -->
-        <section id="items" class="container-productos">
+        <section data-aos="zoom-in" id="items" class="container-productos">
         </section>
 
     </main>
@@ -85,8 +77,21 @@
             </div>
         </div>
     </footer>
-    <script src="https://kit.fontawesome.com/7a3873578f.js" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../js/script.js"></script>
+
+    <!-- FONTAWESOME -->
+        <script src="https://kit.fontawesome.com/7a3873578f.js" crossorigin="anonymous"></script>
+    <!-- SWEETALERT -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- JS SCRIPT -->
+        <script src="../js/script.js"></script>
+
+    <!-- AOS  -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- AOS SCRIPT -->
+        <script>
+            AOS.init({
+                duration:1000
+            });
+        </script>
 </body>
 </html>
