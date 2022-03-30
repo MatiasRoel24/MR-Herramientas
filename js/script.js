@@ -13,109 +13,51 @@
         const miLocalStorage = window.localStorage;
     /* Variable select */
         let contenedorProductos = document.querySelector(".container-productos");
+    /* Variable array de objetos */
+        let listaHerramientas = [];
 
-/* Objeto de herramientas */
-class Herramienta{
-    constructor(nombre, precio, stock, color,imagen,id){
-        this.nombre = nombre;
-        this.precio = precio;
-        this.stock = stock;
-        this.color = color;
-        this.imagen = imagen;
-        this.id = id;
-    }
-}
-
-/* Herramientas */
-const martillo = new Herramienta("Martillo",100,20,"Rojo","../img/martillo.jpg",1);
-const llaveAlem = new Herramienta("Llave alem",50,10,"Rojo","../img/llave-alem.jpg",2);
-const pinza = new Herramienta("Pinza",90,40,"Rojo","../img/taladro.jpg",3);
-const cajaHerramientas = new Herramienta("Caja de Herramientas",500,15,"Azul","../img/caja-de-tornillos.jpg",4);
-const destornillador = new Herramienta("Destornillador",10,100,"Azul","../img/destornillador.jpg",5);
-
-/* Array de objetos */
-const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destornillador]; 
-
-/* ---FILTRO SELECT--- */
+/* Fetch: Busco mi data.json */  
+    fetch('../data.json')
+        .then((resp) => resp.json())
+        .then((data) => generarCardsCompletas(data))
 
     /* Genero cards completas */
-    for(const producto of listaHerramientas){
-            let cards = document.createElement("div");
+    function generarCardsCompletas(data) {
+        listaHerramientas = listaHerramientas.concat(data);
+        for(const producto of data){
+                let cards = document.createElement("div");
 
-            cards.innerHTML = ` <div class="container-cards">
-                                    <div class="card">
-                                        <div class="card__img">
-                                            <img class="card__imagen" src="${producto.imagen}" alt="${producto.nombre}">
-                                        </div>
-                                        <div class="card__info">
-                                            <div class="card__titulo">
-                                            <p>${producto.nombre}</p>
+                cards.innerHTML = ` <div class="container-cards">
+                                        <div class="card">
+                                            <div class="card__img">
+                                                <img class="card__imagen" src="${producto.imagen}" alt="${producto.nombre}">
                                             </div>
-                                            <div class="card__descripcion">
-                                                <p>El precio es:</p>
-                                                <p class="card__descrip">$${producto.precio}</p>
-                                            </div>    
-                                            <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>
-                                        </div>
-                                    </div>
-                                </div>`
-            contenedorProductos.appendChild(cards);    
-    }
-
-    /* Genero cards filtradas */
-    function generadorCards(listaColor){
-        contenedorProductos.innerHTML = '';
-
-        for(const producto of listaColor){
-            let cards = document.createElement("div");
-
-            cards.innerHTML = ` <div class="container-cards">
-                                    <div class="card">
-                                        <div class="card__img">
-                                            <img class="card__imagen" src="${producto.imagen}" alt="${producto.nombre}">
-                                        </div>
-                                        <div class="card__info">
-                                            <div class="card__titulo">
+                                            <div class="card__info">
+                                                <div class="card__titulo">
                                                 <p>${producto.nombre}</p>
-                                            </div>
-                                            <div class="card__descripcion">
-                                                <p>El precio es:</p>
-                                                <p class="card__descrip">$${producto.precio}</p>
                                                 </div>
-                                            <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>   
+                                                <div class="card__descripcion">
+                                                    <p>El precio es:</p>
+                                                    <p class="card__descrip">$${producto.precio}</p>
+                                                </div>    
+                                                <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>`
-            contenedorProductos.appendChild(cards);
+                                    </div>`
+                contenedorProductos.appendChild(cards);    
         }
-    } 
 
-    /* Genero boton filtro */
-    function filtroSelect(){
-        /* Filtro de color */
-        let filtroColor = document.getElementById('filtro-color');
-        let colorHerramienta = filtroColor.value;
+        /* Busco btns card */
 
-        const listaColor = listaHerramientas.filter(x => x.color == colorHerramienta);
-
-        /* GENERO LAS CARDS SEGUN EL FILTRO */
-        if (listaColor.length == 0){
-            contenedorProductos.innerHTML = '';
-            generadorCards(listaHerramientas)
-        }
-        else{
-            contenedorProductos.innerHTML = '';
-            generadorCards(listaColor)
-        }
-    }
-
-/* ---CARRITO--- */
-    /* Busco btns card */
         let btnProductos = document.querySelectorAll("#btn-card");
         btnProductos.forEach((btnProducto) => {
             btnProducto.addEventListener('click', anyadirProductoAlCarrito)/* Por cada uno escucho un cambio*/
         })
-    /* Añadir productos al carrito */
+    }
+
+/* ---CARRITO--- */
+        
+    /* FUNCIONES DEL CARRITO */
 
         function anyadirProductoAlCarrito(e){
             /* Efectuo el cambio escuchado */
@@ -216,24 +158,22 @@ const listaHerramientas = [martillo, llaveAlem, pinza, cajaHerramientas, destorn
 
         /* Eventos */
 
-        /* Boton de compra */
-        
-        btnCompra.addEventListener('click',compraTotal)
-        function compraTotal(){
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Su compra se realizo con exito',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            containerCardsCarrito.innerHTML = ''; 
-            vaciarCarrito();
-        }
+            /* Boton de compra */
+            btnCompra.addEventListener('click',compraTotal)
+            function compraTotal(){
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Su compra se realizo con exito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                containerCardsCarrito.innerHTML = ''; 
+                vaciarCarrito();
+            }
 
-        /* Boton vaciar */
-
-        DOMbtnVaciar.addEventListener('click',vaciarCarrito)
+            /* Boton vaciar */
+            DOMbtnVaciar.addEventListener('click',vaciarCarrito)
 
 /* Inicio */
 

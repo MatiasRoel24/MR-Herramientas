@@ -1,0 +1,42 @@
+[
+    {
+       "nombre": "Martillo",
+       "precio": 100,
+       "stock": 20,
+       "color": "Rojo",
+       "imagen": "../img/martillo.jpg",
+       "id": 1
+    },
+    {
+        "nombre": "Llave alem",
+        "precio": 50,
+        "stock": 10,
+        "color": "Rojo",
+        "imagen": "../img/llave-alem.jpg",
+        "id": 2
+     },
+     {
+        "nombre": "Pinza",
+        "precio": 90,
+        "stock": 40,
+        "color": "Rojo",
+        "imagen": "../img/taladro.jpg",
+        "id": 3
+     },
+     {
+        "nombre": "Caja de Herramientas",
+        "precio": 500,
+        "stock": 15,
+        "color": "Azul",
+        "imagen": "../img/caja-de-tornillos.jpg",
+        "id": 4
+     },
+     {
+        "nombre": "Destornillador",
+        "precio": 10,
+        "stock": 100,
+        "color": "Azul",
+        "imagen": "../img/destornillador.jpg",
+        "id": 5
+     }
+]
