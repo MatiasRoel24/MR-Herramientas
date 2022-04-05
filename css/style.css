@@ -25,6 +25,10 @@ body{
     min-height: 100vh;
 }
 
+.body-secundario{
+    padding-bottom: 0rem;
+}
+
 
 .container{
     width: 90%;
@@ -205,6 +209,7 @@ body{
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    object-fit: cover;
     height: calc(100vh - 7.9rem);
     width: 100%;
 }
@@ -219,11 +224,11 @@ body{
 
 .hero__titulo{
     font-size: 10rem;
-    color: black;
+    color: white;
 }
 
 .hero__subtitulo{
-    color: black;
+    color: white;
     font-size: 4rem;
 }
 
@@ -560,6 +565,8 @@ body{
         height: 8rem;
     }
 }
+
+
 
 
 

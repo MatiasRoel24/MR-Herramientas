@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Fetch: Busco mi data.json */  
         fetch('../data.json')
             .then((resp) => resp.json())
-            .then((data) => generarCardsCompletas(data))
+            .then((data) => {
+                generarCardsCompletas(data); 
+                renderizarCarrito(data);
+            })
     
         /* Genero cards completas */
         function generarCardsCompletas(data) {
@@ -67,20 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     guardarCarritoEnLocalStorage();
             }
             
-            function renderizarCarrito(){
+            function renderizarCarrito(data){
                 /* Vaciamos todo el HTML */
                  DOMcarrito.textContent = ''; 
                 /* Quitamos los duplicados */
                 const carritoSinDuplicados = [...new Set(carrito)];
-                let miItem = []
                 /* Generamos nodos apartir del carrito */
                 carritoSinDuplicados.forEach((item) => {
                     /* Buscamos el item que necesitamos*/
-                    miItem = listaHerramientas.filter((itemBaseDatos) =>{
+                    let miItem = listaHerramientas.filter((itemBaseDatos) =>{
                         /* Coinciden las id? Solo puede existir un caso */
                         return itemBaseDatos.id === parseInt(item);
                     });
-                    console.log(miItem)
 
                     
                     /* Cuenta el numero de veces que se repite el producto */
@@ -152,7 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (miLocalStorage.getItem('carrito') !== null){
                     /* Carga la info */
                     carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+                    
                 }
+                
             }
     
             /* Eventos */
@@ -178,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             timer: 1500
                         })
                     } 
-                    containerCardsCarrito.innerHTML = ''; 
                     vaciarCarrito();
                 }
     
