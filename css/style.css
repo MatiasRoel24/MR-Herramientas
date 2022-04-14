@@ -341,18 +341,19 @@ body{
 
 .btn-grad {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
 .btn-grad {
-   margin-top: .5rem;
-   padding: 15px 40px;
-   text-align: center;
-   transition: 0.5s;
-   background-size: 200% auto;
-   color: white;
-   font-size: 1.5rem;            
-   border-radius: 10px;
-   display: block;
-   text-decoration: none;
-   border: none;
-   font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin-top: .5rem;
+    padding: 15px 40px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    font-size: 1.5rem;            
+    border-radius: 10px;
+    display: block;
+    text-decoration: none;
+    border: none;
+    font-family: 'Poppins', sans-serif;
  }
 
  .cart-plus{
@@ -639,15 +640,3 @@ body{
     resize: none;
     outline: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-

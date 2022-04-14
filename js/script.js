@@ -8,19 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
             let btnCompra = document.querySelector(".carrito_boton-comprar");
             let DOMTotal = document.querySelector(".total__plata");
             let DOMbtnVaciar = document.querySelector(".carrito-boton-vaciar");
+            let btnComprarCarrito = document.getElementById("btnCarritoComprar");
             const miLocalStorage = window.localStorage;
         /* Variable select */
             let contenedorProductos = document.querySelector(".container-productos");
         /* Variable array de objetos */
             let listaHerramientas = [];
     
-    /* Fetch: Busco mi data.json */  
-        fetch('../data.json')
-            .then((resp) => resp.json())
-            .then((data) => {
-                generarCardsCompletas(data); 
-                renderizarCarrito(data);
-            })
+    /*Busco mi data.json */  
+
+    async function fetchData() {
+        try {
+            const res = await fetch('../data.json');
+            const data = await res.json();
+            generarCardsCompletas(data); 
+            renderizarCarrito(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
         /* Genero cards completas */
         function generarCardsCompletas(data) {
@@ -158,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             }
     
-            /* Eventos */
+            /* Eventos de compra*/
     
                 /* Boton de compra */
                 btnCompra.addEventListener('click',compraTotal)
@@ -191,5 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     cargarCarritoDeLocalStorage();
     renderizarCarrito();
+    fetchData();
     
     });
