@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* Variables globales */
-        /* Variables carrito */
-            let carrito = [];
+    /* Variables carrito */
+    /* Variables globales */ 
+        fetchData();
+        let carrito = [];
             let containerCardsCarrito = document.querySelector(".carrito__container");
             let DOMcarrito = document.querySelector(".carrito__container");
             let btnCompra = document.querySelector(".carrito_boton-comprar");
@@ -77,13 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             function renderizarCarrito(data){
+                console.log(data)
                 /* Vaciamos todo el HTML */
                  DOMcarrito.textContent = ''; 
                 /* Quitamos los duplicados */
                 const carritoSinDuplicados = [...new Set(carrito)];
+                
                 /* Generamos nodos apartir del carrito */
                 carritoSinDuplicados.forEach((item) => {
                     /* Buscamos el item que necesitamos*/
+                    console.log(listaHerramientas)
                     let miItem = listaHerramientas.filter((itemBaseDatos) =>{
                         /* Coinciden las id? Solo puede existir un caso */
                         return itemBaseDatos.id === parseInt(item);
@@ -197,6 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     cargarCarritoDeLocalStorage();
     renderizarCarrito();
-    fetchData();
+   
     
     });
