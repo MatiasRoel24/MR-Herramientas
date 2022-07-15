@@ -207,7 +207,7 @@ body{
     background-image: url(../img/bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: left;
     background-attachment: fixed;
     object-fit: cover;
     height: calc(100vh - 7.9rem);
@@ -230,10 +230,15 @@ body{
 .hero__subtitulo{
     color: white;
     font-size: 4rem;
+    background-color: black;
+    padding: 1rem 5rem;
+    border-radius: 0.2rem;
 }
 
+/* ICONO HERRAMIENTAS */
 
 @media (max-width: 868px){
+
     .hero__titulo{
         font-size:3.5rem;
         color: var(--color-blanco);
@@ -242,6 +247,7 @@ body{
     .hero__subtitulo{
         color: var(--color-blanco);
         font-size: 2rem;
+        
     }
     
     .hero__btn-cta{
@@ -304,8 +310,7 @@ body{
     box-shadow: 0 0.1rem 8rem rgba(0, 0, 0, .2);
     display: flex;
     align-items: center;
-    border-radius: .8rem;
-    
+    border-radius: .8rem; 
 }
 
 .card__img{
@@ -336,25 +341,25 @@ body{
     gap: 0.5rem;
     font-size: 2rem;
     font-weight: 500;
-    
 }
 
-.btn-grad {background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%)}
-.btn-grad {
-    cursor: pointer;
-    margin-top: .5rem;
-    padding: 15px 40px;
-    text-align: center;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    font-size: 1.5rem;            
-    border-radius: 10px;
-    display: block;
+.btn-grad{
+    background-color: var(--color-principal);
+    font-size: 2rem;
+    font-weight: bold;
     text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    padding: 1.8rem;
     border: none;
-    font-family: 'Poppins', sans-serif;
- }
+    border-radius: 0.8rem;
+    cursor: pointer;
+    box-shadow: 0px 0px 22px -3px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 22px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 22px -3px rgba(0,0,0,0.75);
+    margin-top: 1.5rem;
+}
+
 
  .cart-plus{
      font-size: 2rem;
@@ -640,3 +645,6 @@ body{
     resize: none;
     outline: none;
 }
+
+/* Animaciones */
+

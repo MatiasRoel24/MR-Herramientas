@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                         <p>El precio es:</p>
                                                         <p class="card__descrip">$${producto.precio}</p>
                                                     </div>    
-                                                    <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>
+                                                    <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Añadir al carrito</button>
                                                 </div>
                                             </div>
                                         </div>`
