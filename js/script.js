@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                         <p>El precio es:</p>
                                                         <p class="card__descrip">$${producto.precio}</p>
                                                     </div>    
-                                                    <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Añadir al carrito</button>
+                                                    <button id="btn-card" class="btn-grad btn-grad--ancho" type="button" marcador="${producto.id}">Comprar</button>
                                                 </div>
                                             </div>
                                         </div>`
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             function renderizarCarrito(data){
-                console.log(data)
+                
                 /* Vaciamos todo el HTML */
                  DOMcarrito.textContent = ''; 
                 /* Quitamos los duplicados */
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 /* Generamos nodos apartir del carrito */
                 carritoSinDuplicados.forEach((item) => {
                     /* Buscamos el item que necesitamos*/
-                    console.log(listaHerramientas)
+                    
                     let miItem = listaHerramientas.filter((itemBaseDatos) =>{
                         /* Coinciden las id? Solo puede existir un caso */
                         return itemBaseDatos.id === parseInt(item);
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let rowCardsCarrito =  document.createElement("div");
                     let cardsCarritoContenido = `
                         <div class="carrito__elementos">
-                            <img class="carrito__img" src="${miItem[0].imagen}" alt="">
+                            <img class="carrito__img" src="${miItem[0].imagen}" alt="imagen carrito">
                             <h4 class= "carrito__title">${numeroUnidadesItem} X ${miItem[0].nombre} </h4>
                             <h5 class= "carrito__precio">$${miItem[0].precio}</h5>
                             <button id="boton-vaciar" class="btn-vaciar">X</button>

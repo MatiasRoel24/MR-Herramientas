@@ -10,6 +10,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="../css/style.css">
     <title>MR-Herramientas</title>
+    <script src="https://kit.fontawesome.com/86303177c3.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -34,28 +35,35 @@
         </nav>
     </header>
 
-    <main class="main_form">
-        <form class="form" action="">
-            <h2 class="form__title">Escribinos un mensaje: </h2>
-            <div class="form__container">
-                <div class="form__group">
-                    <input class="form__input" type="text" id="name"  placeholder="">
-                    <label class="form__label" for="name">Nombre:</label>
-                    <span class="form__line"></span>
+    <main class="container-contacto">
+        <h2 class="contacto__title">Contacto <i class="fa-solid fa-address-book"></i></h2>
+        <!-- FORM -->
+        <div class="formulario__container">
+            <form class="form" action="">
+                <h2 class="form__title">Escribinos tu mensaje: </h2>
+                <div class="form__container">
+                    <div class="form__group">
+                        <input class="form__input" type="text" id="name"  placeholder="">
+                        <label class="form__label" for="name">Nombre:</label>
+                        <span class="form__line"></span>
+                    </div>
+                    <div class="form__group">
+                        <input class="form__input"type="text" id="apellido"  placeholder="">
+                        <label class="form__label" for="apellido">Apellido:</label>
+                        <span class="form__line"></span>
+                    </div>
+                    <div class="form__group">   
+                        <textarea class="form__textarea" name="textarea" id="textarea" cols="30" rows="10" placeholder="Ingrese su mensaje"></textarea>
+                        <span class="form__line"></span>
+                    </div>
+                    <a class= "btn-grad" href="#">Enviar</a>
                 </div>
-                <div class="form__group">
-                    <input class="form__input"type="text" id="apellido"  placeholder="">
-                    <label class="form__label" for="apellido">Apellido:</label>
-                    <span class="form__line"></span>
-                </div>
-                <div class="form__group">   
-                    <textarea class="form__textarea" name="textarea" id="textarea" cols="30" rows="10" placeholder="Ingrese su mensaje"></textarea>
-                    <span class="form__line"></span>
-                </div>
-                <a class= "btn-grad" href="#">Enviar</a>
-            </div>
-        </form>
+            </form>
 
+            <!-- IFRAME -->
+            <h4 class="contacto-ifrema__title">Donde nos ubicamos <i class="fa-solid fa-location-dot icon-map"></i></h4>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.6976138987907!2d-58.42154038463273!3d-34.61180716543348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca5f173c8405%3A0xe9fb8962e2b76d37!2sColombres%2038%2C%20C1177%20AAB%2C%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1657853517124!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
     </main>
 
     <footer class="footer footer--nc">
@@ -73,6 +81,5 @@
         </div>
     </footer>
 
-    <script src="https://kit.fontawesome.com/7a3873578f.js" crossorigin="anonymous"></script>
 </body>
 </html>
